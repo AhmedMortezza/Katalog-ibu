@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin - Pengelolaan Toko</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=2">
+  <link rel="icon" type="image/svg+xml" href="/static/images/default-logo.svg">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: var(--bg-page);
+      padding: 20px;
+    }
+    .login-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-beige);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      max-width: 400px;
+      width: 100%;
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .login-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-round);
+      object-fit: cover;
+      margin-bottom: 14px;
+      border: 2px solid var(--border-beige);
+    }
+    .login-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-cocoa);
+      margin-bottom: 4px;
+    }
+    .login-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .password-input-wrap {
+      position: relative;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .toggle-pwd {
+      position: absolute;
+      right: 12px;
+      top: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+    .login-error {
+      color: var(--color-danger);
+      background-color: #FDF2F2;
+      border: 1px solid #F8D7DA;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <img id="login-logo-img" src="/static/images/default-logo.svg" alt="Logo" class="login-logo">
+    <h1 class="login-title" id="login-store-name">Pengelolaan Toko</h1>
+    <p class="login-subtitle">Masukkan password admin untuk mengelola menu, foto, harga, dan logo toko.</p>
+
+    <div id="login-error-box" class="login-error"></div>
+
+    <form id="admin-login-form" onsubmit="handleLogin(event)">
+      <div class="password-input-wrap">
+        <label class="form-label" for="admin-pwd">Password Admin:</label>
+        <input type="password" id="admin-pwd" class="form-control" placeholder="Masukkan password admin" required autofocus>
+        <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()" title="Lihat password">👁️</button>
+      </div>
+
+      <button type="submit" id="btn-login" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem;">
+        🔓 Masuk ke Panel Admin
+      </button>
+    </form>
+
+    <div style="margin-top: 24px; font-size: 0.85rem;">
+      <a href="/" style="color: var(--text-secondary); text-decoration: none;">← Kembali ke Katalog Publik</a>
+    </div>
+  </div>
+
+  <script>
+    // Load store logo and name
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => {
+        if (data.store) {
+          if (data.store.name) document.getElementById('login-store-name').textContent = data.store.name;
+          if (data.store.logo_url) document.getElementById('login-logo-img').src = data.store.logo_url;
+        }
+      })
+      .catch(() => {});
+
+    function togglePasswordVisibility() {
+      const input = document.getElementById('admin-pwd');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('admin-pwd').value.trim();
+      const errBox = document.getElementById('login-error-box');
+      const btn = document.getElementById('btn-login');
+
+      errBox.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Memverifikasi...';
+
+      try {
+        const res = await fetch('/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwd })
+        });
+        const result = await res.json();
+        if (result.success) {
+          window.location.href = '/admin';
+        } else {
+          errBox.textContent = result.error || 'Password salah!';
+          errBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = '🔓 Masuk ke Panel Admin';
+        }
+      } catch (err) {
+        errBox.textContent = 'Terjadi kesalahan jaringan.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = '🔓 Masuk ke Panel Admin';
+      }
+    }
+  </script>
+</body>
+</html>

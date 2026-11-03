@@ -133,17 +133,28 @@ async function saveStoreSettings(e) {
     logo_url: document.getElementById('input-store-logo-url').value.trim()
   };
 
+  const newPwdInput = document.getElementById('input-admin-pwd');
+  if (newPwdInput && newPwdInput.value.trim()) {
+    payload.admin_password = newPwdInput.value.trim();
+  }
+
   try {
     const res = await fetch('/api/settings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    if (res.status === 401) {
+      alert('Sesi admin berakhir. Silakan login kembali.');
+      window.location.href = '/admin/login';
+      return;
+    }
     const result = await res.json();
     if (result.success) {
       adminData.store = result.store;
       populateStoreTab();
-      showToast('Pengaturan nama dan logo berhasil disimpan!');
+      if (newPwdInput) newPwdInput.value = '';
+      showToast('Pengaturan nama, logo & password berhasil disimpan!');
     } else {
       showToast('Gagal menyimpan: ' + (result.error || 'Error'));
     }
