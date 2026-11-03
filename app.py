@@ -26,6 +26,18 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def normalize_wa_number(raw):
+    if not raw:
+        return '6281234567890'
+    num = ''.join(c for c in str(raw) if c.isdigit())
+    if num.startswith('620'):
+        num = '62' + num[3:]
+    elif num.startswith('0'):
+        num = '62' + num[1:]
+    elif num.startswith('8'):
+        num = '62' + num
+    return num
+
 def load_db():
     if not os.path.exists(DATA_FILE):
         return {
@@ -118,8 +130,7 @@ def update_settings():
     if 'tagline' in payload:
         db['store']['tagline'] = payload['tagline'].strip()
     if 'whatsapp_number' in payload:
-        cleaned_wa = ''.join(c for c in payload['whatsapp_number'] if c.isdigit())
-        db['store']['whatsapp_number'] = cleaned_wa
+        db['store']['whatsapp_number'] = normalize_wa_number(payload['whatsapp_number'])
     if 'logo_url' in payload and payload['logo_url'].strip():
         db['store']['logo_url'] = payload['logo_url'].strip()
     if 'admin_password' in payload and payload['admin_password'].strip():

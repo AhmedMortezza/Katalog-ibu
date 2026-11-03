@@ -328,6 +328,20 @@ function toggleAddressField(deliveryType) {
   }
 }
 
+// Helper to sanitize Indonesian WhatsApp numbers to 628xxx (no +, no leading 0)
+function cleanWaNumber(raw) {
+  if (!raw) return '6281234567890';
+  let num = String(raw).replace(/\D/g, ''); // hanya ambil angka
+  if (num.startsWith('620')) {
+    num = '62' + num.slice(3);
+  } else if (num.startsWith('0')) {
+    num = '62' + num.slice(1);
+  } else if (num.startsWith('8')) {
+    num = '62' + num;
+  }
+  return num;
+}
+
 // Send WhatsApp Order
 function sendWhatsAppOrder(e) {
   e.preventDefault();
@@ -338,7 +352,7 @@ function sendWhatsAppOrder(e) {
   }
 
   const storeName = storeData?.store?.name || 'Dapur Snack Ibu';
-  const waNumber = storeData?.store?.whatsapp_number || '6281234567890';
+  const waNumber = cleanWaNumber(storeData?.store?.whatsapp_number);
 
   const customerName = document.getElementById('order-name').value.trim();
   const deliveryType = document.getElementById('order-delivery-type').value;
