@@ -1068,3 +1068,241 @@ textarea.form-control {
   font-weight: 700;
 }
 
+/* ==================== FLOATING CS / CHAT ADMIN WIDGET ==================== */
+.cs-widget-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: inherit;
+}
+
+.cs-trigger-btn {
+  background-color: var(--color-wa);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-round);
+  padding: 10px 18px 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(38, 99, 54, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.cs-trigger-btn:hover {
+  background-color: var(--color-wa-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 99, 54, 0.45);
+}
+
+.cs-trigger-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.cs-trigger-badge {
+  background-color: #E53E3E;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: var(--radius-round);
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  border: 2px solid #FFFFFF;
+}
+
+/* CS Popup Card */
+.cs-popup-card {
+  width: 310px;
+  max-width: calc(100vw - 32px);
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-beige);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(42, 33, 27, 0.18);
+  margin-bottom: 12px;
+  overflow: hidden;
+  animation: csFadeIn 0.2s ease-out;
+}
+
+@keyframes csFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cs-popup-header {
+  background-color: var(--color-cocoa);
+  color: #FFFFFF;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cs-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cs-avatar-wrap {
+  width: 36px;
+  height: 36px;
+  background-color: #FAF7F2;
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.cs-status-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #38A169;
+  border-radius: var(--radius-round);
+  border: 2px solid #FFFFFF;
+}
+
+.cs-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.cs-subtitle {
+  font-size: 0.78rem;
+  color: #E5DACD;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.cs-online-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #48BB78;
+  border-radius: var(--radius-round);
+}
+
+.cs-close-btn {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.cs-close-btn:hover {
+  opacity: 1;
+}
+
+.cs-popup-body {
+  padding: 16px;
+}
+
+.cs-welcome-msg {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.cs-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.cs-action-btn {
+  background-color: var(--bg-beige-subtle);
+  border: 1px solid var(--border-beige);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cs-action-btn:hover {
+  background-color: #EFE8DE;
+  border-color: var(--color-cocoa);
+  color: var(--color-cocoa);
+  transform: translateX(2px);
+}
+
+.cs-direct-wa-btn {
+  width: 100%;
+  background-color: var(--color-wa);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.18s ease;
+}
+
+.cs-direct-wa-btn:hover {
+  background-color: var(--color-wa-hover);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .cs-widget-container {
+    bottom: 20px;
+    right: 16px;
+    transition: bottom 0.25s ease;
+  }
+
+  body.has-cart-bar .cs-widget-container {
+    bottom: 78px;
+  }
+
+  .cs-popup-card {
+    width: 290px;
+  }
+}
+

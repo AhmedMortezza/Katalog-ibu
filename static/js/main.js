@@ -275,7 +275,10 @@ function renderOrderSection() {
       </div>
     `;
     totalPriceEl.textContent = 'Rp 0';
-    if (floatingBar) floatingBar.style.display = 'none';
+    if (floatingBar) {
+      floatingBar.style.display = 'none';
+      document.body.classList.remove('has-cart-bar');
+    }
     return;
   }
 
@@ -312,6 +315,7 @@ function renderOrderSection() {
   if (floatingBar && floatingText) {
     floatingBar.style.display = 'flex';
     floatingText.textContent = `🛒 ${totalQty} pesanan (${formatRupiah(totalAmount)})`;
+    document.body.classList.add('has-cart-bar');
   }
 }
 
@@ -393,6 +397,37 @@ function sendWhatsAppOrder(e) {
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
   window.open(waUrl, '_blank');
 }
+
+// ==========================================
+// FLOATING CS / CHAT ADMIN WIDGET
+// ==========================================
+
+// Toggle CS Popup visibility
+function toggleCsPopup(forceState) {
+  const popup = document.getElementById('cs-popup');
+  if (!popup) return;
+  const isOpening = forceState !== undefined ? forceState : (popup.style.display === 'none' || !popup.style.display);
+  popup.style.display = isOpening ? 'block' : 'none';
+}
+
+// Open WhatsApp with pre-composed query
+function openWaChat(customText) {
+  const storeName = storeData?.store?.name || 'Dapur Snack Ibu';
+  const waNumber = cleanWaNumber(storeData?.store?.whatsapp_number);
+  const greeting = customText ? customText : `Halo ${storeName}, saya mau tanya-tanya seputar pemesanan snack dan rice box...`;
+  const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(greeting)}`;
+  window.open(url, '_blank');
+  toggleCsPopup(false);
+}
+
+// Close CS popup when clicking outside the widget
+document.addEventListener('click', (e) => {
+  const widget = document.getElementById('cs-widget');
+  const popup = document.getElementById('cs-popup');
+  if (popup && popup.style.display === 'block' && widget && !widget.contains(e.target)) {
+    toggleCsPopup(false);
+  }
+});
 
 // Initial load
 document.addEventListener('DOMContentLoaded', loadCatalog);
