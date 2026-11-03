@@ -36,6 +36,7 @@
     <div class="section-nav">
       <button class="nav-pill active" onclick="switchSection('snacks')">🍪 Aneka Snack</button>
       <button class="nav-pill" onclick="switchSection('packages')">🍱 Pilihan Nasi Box</button>
+      <button class="nav-pill" onclick="switchSection('custom')">✨ Menu Custom (By Request)</button>
       <button class="nav-pill" onclick="switchSection('order')">📝 Form Pemesanan WA</button>
     </div>
 
@@ -58,6 +59,87 @@
       </div>
       <div class="package-grid" id="packages-container">
         <!-- Kartu paket akan di-render secara dinamis oleh JavaScript -->
+      </div>
+    </section>
+
+    <!-- Bagian 3: Menu Custom (By Request) -->
+    <section id="section-custom" class="catalog-section" style="display: none;">
+      <div class="custom-menu-card">
+        <div class="custom-menu-header">
+          <div class="custom-header-icon">✨</div>
+          <div>
+            <h3 class="custom-card-title">Menu Custom & By Request</h3>
+            <p class="custom-card-subtitle">
+              Punya ide menu sendiri atau ingin menyesuaikan snack dan lauk nasi box dengan budget acara Anda? Kami siap buatkan khusus untuk Anda!
+            </p>
+          </div>
+        </div>
+
+        <div class="custom-features-grid">
+          <div class="custom-feature-item">
+            <span class="custom-feat-icon">💰</span>
+            <div>
+              <div class="custom-feat-title">Sesuai Budget Anda</div>
+              <div class="custom-feat-desc">Tentukan harga per box, kami bantu pilihkan kombinasi menu terbaik.</div>
+            </div>
+          </div>
+          <div class="custom-feature-item">
+            <span class="custom-feat-icon">🍱</span>
+            <div>
+              <div class="custom-feat-title">Bebas Pilih Kombinasi</div>
+              <div class="custom-feat-desc">Mix kue manis, gurih, variasi lauk nasi box, atau buah & minuman.</div>
+            </div>
+          </div>
+          <div class="custom-feature-item">
+            <span class="custom-feat-icon">🎉</span>
+            <div>
+              <div class="custom-feat-title">Cocok Segala Acara</div>
+              <div class="custom-feat-desc">Arisan, rapat kantor, syukuran keluarga, pengajian, hingga hajatan.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Konsultasi Menu Custom Langsung via WA -->
+        <form id="custom-order-form" class="custom-form" onsubmit="sendCustomWaRequest(event)">
+          <div class="custom-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="custom-type">Jenis Pesanan Custom: *</label>
+              <select id="custom-type" class="form-control" required>
+                <option value="Snack Box Custom (Kombinasi Kue & Minuman)">🍪 Snack Box Custom (Kombinasi Kue & Minuman)</option>
+                <option value="Nasi Box / Rice Box Custom (Pilihan Lauk Khusus)">🍱 Nasi Box / Rice Box Custom (Pilihan Lauk Khusus)</option>
+                <option value="Aneka Snack Nampan / Tampah">🍘 Aneka Snack Nampan / Tampah</option>
+                <option value="Menu / Masakan Lainnya By Request">🍲 Menu / Masakan Lainnya By Request</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="custom-qty">Perkiraan Jumlah Porsi / Box: *</label>
+              <input type="text" id="custom-qty" class="form-control" required placeholder="Contoh: 30 box / 50 porsi">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="custom-budget">Perkiraan Budget per Porsi (Opsional):</label>
+              <input type="text" id="custom-budget" class="form-control" placeholder="Contoh: Rp 12.000 / box atau Rp 20.000 / box">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="custom-date">Rencana Tanggal Acara: (Opsional)</label>
+              <input type="text" id="custom-date" class="form-control" placeholder="Contoh: Minggu depan / Sabtu tgl 15">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="custom-notes">Rincian Menu yang Diinginkan / Request Khusus: *</label>
+            <textarea id="custom-notes" class="form-control" rows="3" required placeholder="Contoh: Mau isi 3 kue (pastel, sus vla, lemper ayam) + air mineral cup, atau request nasi box lauk ayam bakar manis tanpa pedas."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-wa" style="width: 100%; padding: 13px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            💬 Konsultasikan Menu Custom via WhatsApp
+          </button>
+          <p class="form-hint" style="text-align: center; margin-top: 8px;">
+            Admin akan langsung membaca detail request Anda dan memberikan rekomendasi serta penawaran terbaik.
+          </p>
+        </form>
       </div>
     </section>
 
@@ -186,6 +268,9 @@
           </button>
           <button type="button" class="cs-action-btn" onclick="openWaChat('Halo, saya ingin tanya rincian dan pemesanan paket nasi box.')">
             🍱 Tanya Paket Nasi Box
+          </button>
+          <button type="button" class="cs-action-btn" onclick="openWaChat('Halo, saya ingin konsultasi pesanan menu custom sesuai budget.')">
+            ✨ Request Menu Custom / By Request
           </button>
           <button type="button" class="cs-action-btn" onclick="openWaChat('Halo, saya mau tanya ongkos kirim dan jadwal pengantaran.')">
             🚚 Tanya Pengiriman / Ongkir

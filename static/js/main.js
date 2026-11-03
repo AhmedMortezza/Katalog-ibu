@@ -138,29 +138,68 @@ function renderPackages(packages) {
       </article>
     `;
   }).join('');
+
+  // Tambahkan Kartu Highlight Menu Custom / By Request
+  const customCardHtml = `
+    <article class="package-card" style="border: 2px dashed var(--border-beige); background-color: var(--bg-beige-subtle); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div class="package-header">
+          <div>
+            <h4 class="package-title" style="color: var(--color-cocoa);">✨ Paket Custom / By Request</h4>
+          </div>
+          <span class="card-badge" style="position: static; display: inline-block; background-color: var(--color-cocoa);">By Request</span>
+        </div>
+        <div class="package-body">
+          <p class="package-desc">Ingin kombinasi snack tertentu atau paket nasi box sesuai budget acara Anda? Kami buatkan khusus sesuai permintaan.</p>
+          <div class="package-items-title">Kelebihan Menu Custom:</div>
+          <ul class="package-items-list">
+            <li>Bebas pilih kue / snack dan lauk</li>
+            <li>Bisa disesuaikan budget acara per box</li>
+            <li>Konsultasi gratis langsung ke WhatsApp</li>
+          </ul>
+        </div>
+      </div>
+      <div class="package-footer" style="margin-top: 18px;">
+        <div class="package-price-wrap">
+          <span class="package-price-label">Budget:</span>
+          <span class="package-price" style="font-size: 1.05rem;">Sesuai Budget</span>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="switchSection('custom'); document.getElementById('section-custom').scrollIntoView({behavior: 'smooth'});">
+          ✨ Request Menu
+        </button>
+      </div>
+    </article>
+  `;
+
+  container.innerHTML += customCardHtml;
 }
 
 // Tab Switcher
 function switchSection(section) {
   const snackSec = document.getElementById('section-snacks');
   const pkgSec = document.getElementById('section-packages');
+  const customSec = document.getElementById('section-custom');
   const orderSec = document.getElementById('section-order');
   const pills = document.querySelectorAll('.nav-pill');
 
-  snackSec.style.display = 'none';
-  pkgSec.style.display = 'none';
-  orderSec.style.display = 'none';
+  if (snackSec) snackSec.style.display = 'none';
+  if (pkgSec) pkgSec.style.display = 'none';
+  if (customSec) customSec.style.display = 'none';
+  if (orderSec) orderSec.style.display = 'none';
   pills.forEach(p => p.classList.remove('active'));
 
   if (section === 'snacks') {
-    snackSec.style.display = 'block';
-    pills[0].classList.add('active');
+    if (snackSec) snackSec.style.display = 'block';
+    if (pills[0]) pills[0].classList.add('active');
   } else if (section === 'packages') {
-    pkgSec.style.display = 'block';
-    pills[1].classList.add('active');
+    if (pkgSec) pkgSec.style.display = 'block';
+    if (pills[1]) pills[1].classList.add('active');
+  } else if (section === 'custom') {
+    if (customSec) customSec.style.display = 'block';
+    if (pills[2]) pills[2].classList.add('active');
   } else if (section === 'order') {
-    orderSec.style.display = 'block';
-    pills[2].classList.add('active');
+    if (orderSec) orderSec.style.display = 'block';
+    if (pills[3]) pills[3].classList.add('active');
   }
 }
 
@@ -246,6 +285,10 @@ function populateQuickAddDropdown() {
     optionsHtml += '</optgroup>';
   }
 
+  optionsHtml += '<optgroup label="── Menu Custom ──">';
+  optionsHtml += '<option value="custom-request">✨ Request Menu Custom Sendiri</option>';
+  optionsHtml += '</optgroup>';
+
   select.innerHTML = optionsHtml;
 }
 
@@ -253,6 +296,13 @@ function populateQuickAddDropdown() {
 function handleQuickAddSelect(selectEl) {
   const val = selectEl.value;
   if (!val) return;
+  if (val === 'custom-request') {
+    switchSection('custom');
+    const customSection = document.getElementById('section-custom');
+    if (customSection) customSection.scrollIntoView({ behavior: 'smooth' });
+    selectEl.value = '';
+    return;
+  }
   const [type, idStr] = val.split('-');
   addToCart(type, parseInt(idStr, 10));
   selectEl.value = '';
@@ -393,6 +443,35 @@ function sendWhatsAppOrder(e) {
   }
 
   waMessage += `\nMohon konfirmasi ketersediaan dan cara pembayarannya ya. Terima kasih! 🙏`;
+
+  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+  window.open(waUrl, '_blank');
+}
+
+// Send Custom By Request Order to WhatsApp
+function sendCustomWaRequest(e) {
+  e.preventDefault();
+  const storeName = storeData?.store?.name || 'Dapur Snack Ibu';
+  const waNumber = cleanWaNumber(storeData?.store?.whatsapp_number);
+
+  const type = document.getElementById('custom-type').value;
+  const qty = document.getElementById('custom-qty').value.trim();
+  const budget = document.getElementById('custom-budget').value.trim();
+  const date = document.getElementById('custom-date').value.trim();
+  const notes = document.getElementById('custom-notes').value.trim();
+
+  let waMessage = `Halo ${storeName}, saya ingin konsultasi Menu Custom / By Request:\n\n`;
+  waMessage += `📋 *DETAIL REQUEST MENU CUSTOM:*\n`;
+  waMessage += `• Jenis: ${type}\n`;
+  waMessage += `• Jumlah: ${qty}\n`;
+  if (budget) {
+    waMessage += `• Target Budget: ${budget}\n`;
+  }
+  if (date) {
+    waMessage += `• Waktu Acara: ${date}\n`;
+  }
+  waMessage += `• Request Menu:\n${notes}\n\n`;
+  waMessage += `Mohon info rekomendasi dan ketersediaannya ya. Terima kasih! 🙏`;
 
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
   window.open(waUrl, '_blank');
