@@ -37,7 +37,7 @@ function renderStoreInfo(store) {
   if (!store) return;
   document.getElementById('store-name').textContent = store.name || 'Dapur Snack Ibu';
   document.getElementById('store-tagline').textContent = store.tagline || 'Camilan Renyah & Lezat Buatan Rumah';
-  document.getElementById('footer-store-name').innerHTML = `<strong>${store.name || 'Dapur Snack Ibu'}</strong> — Selalu dibuat segar dengan cinta.`;
+  document.getElementById('footer-store-name').innerHTML = `<strong>${store.name || 'Dapur Snack Ibu'}</strong>`;
   document.title = `${store.name || 'Dapur Snack Ibu'} - Katalog`;
 
   const logoImg = document.getElementById('store-logo');
