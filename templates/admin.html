@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Pengelola - Katalog Snack Ibu</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="/static/images/default-logo.svg">
+</head>
+<body>
+
+  <!-- Header Admin Backend -->
+  <header class="admin-header">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h1>⚙️ Panel Backend Pengelola</h1>
+        <p style="font-size: 0.85rem; color: #EFE6D8;">Ruang fleksibel untuk ubah logo, nama toko, foto makanan, harga, dan paket snack</p>
+      </div>
+      <div>
+        <a href="/" class="btn btn-outline btn-sm" style="background-color: #FFFFFF; color: var(--color-cocoa);">
+          👁️ Lihat Katalog Web
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigasi Tab Admin -->
+  <div class="container">
+    <div class="admin-nav">
+      <button class="admin-tab active" onclick="showAdminTab('tab-store')">🏪 Identitas & Logo Toko</button>
+      <button class="admin-tab" onclick="showAdminTab('tab-snacks')">🍪 Menu Snack & Harga</button>
+      <button class="admin-tab" onclick="showAdminTab('tab-packages')">📦 Paket Snack Kombo</button>
+    </div>
+  </div>
+
+  <!-- Area Konten Tab Admin -->
+  <main class="container admin-content">
+
+    <!-- ==================== TAB 1: TOKO & LOGO ==================== -->
+    <section id="tab-store" class="admin-tab-pane">
+      <div class="admin-card">
+        <h2 class="admin-card-title">Pengaturan Identitas & Logo Usaha</h2>
+        
+        <!-- Preview & Ubah Logo -->
+        <div class="form-group">
+          <label class="form-label">Logo Usaha Saat Ini:</label>
+          <div class="logo-preview-box">
+            <img id="admin-logo-preview" src="/static/images/default-logo.svg" alt="Preview Logo" class="logo-preview-img">
+            <div>
+              <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Ubah Logo Toko</p>
+              <p class="form-hint" style="margin-bottom: 10px;">Dukungan format: PNG, JPG, JPEG, WebP, atau SVG.</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <label class="btn btn-primary btn-sm" style="cursor: pointer;">
+                  📁 Pilih File Logo
+                  <input type="file" id="logo-file-input" accept="image/*" style="display: none;" onchange="handleLogoUpload(this)">
+                </label>
+                <span id="logo-upload-status" class="form-hint"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form id="store-settings-form" onsubmit="saveStoreSettings(event)">
+          <div class="form-group">
+            <label class="form-label" for="input-store-name">Nama Usaha / Toko Snack:</label>
+            <input type="text" id="input-store-name" class="form-control" required placeholder="Contoh: Dapur Snack Ibu">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-store-tagline">Deskripsi Singkat / Slogan:</label>
+            <input type="text" id="input-store-tagline" class="form-control" placeholder="Contoh: Camilan Renyah & Lezat Buatan Rumah">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-store-wa">Nomor WhatsApp untuk Terima Pesanan:</label>
+            <input type="text" id="input-store-wa" class="form-control" placeholder="Contoh: 6281234567890 (awali dengan 62)">
+            <p class="form-hint">Nomor ini akan langsung dihubungi pelanggan saat menekan tombol "Pesan via WhatsApp".</p>
+          </div>
+
+          <input type="hidden" id="input-store-logo-url">
+          
+          <div style="margin-bottom: 18px;">
+            <button type="button" class="btn btn-outline btn-sm" style="font-size: 0.8rem; padding: 4px 8px;" onclick="toggleLogoUrlInput()">
+              🔗 Atau gunakan link gambar online
+            </button>
+            <div id="logo-url-wrapper" style="display: none; margin-top: 8px;">
+              <input type="text" id="input-store-logo-url-manual" class="form-control" placeholder="https://contoh.com/logo.png" oninput="document.getElementById('input-store-logo-url').value = this.value; document.getElementById('admin-logo-preview').src = this.value || '/static/images/default-logo.svg';">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            💾 Simpan Pengaturan Toko
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: MENU SNACK & HARGA ==================== -->
+    <section id="tab-snacks" class="admin-tab-pane" style="display: none;">
+      <div class="admin-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 class="admin-card-title" style="margin-bottom: 0; border: none; padding: 0;">Daftar Menu Snack</h2>
+            <p class="form-hint">Kelola foto makanan, nama camilan, dan harga satuan secara fleksibel.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openSnackModal()">
+            ➕ Tambah Snack Baru
+          </button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 70px;">Foto</th>
+                <th>Nama Snack</th>
+                <th>Harga</th>
+                <th>Label/Badge</th>
+                <th style="width: 140px; text-align: right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="admin-snacks-table">
+              <!-- Render via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: PAKET SNACK ==================== -->
+    <section id="tab-packages" class="admin-tab-pane" style="display: none;">
+      <div class="admin-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 class="admin-card-title" style="margin-bottom: 0; border: none; padding: 0;">Daftar Paket Snack Kombo</h2>
+            <p class="form-hint">Kelola paket snack hemat, paket arisan, atau hampers spesial.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openPackageModal()">
+            ➕ Tambah Paket Baru
+          </button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nama Paket</th>
+                <th>Harga Paket</th>
+                <th>Daftar Isi Paket</th>
+                <th>Label/Badge</th>
+                <th style="width: 140px; text-align: right;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="admin-packages-table">
+              <!-- Render via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL SNACK ==================== -->
+  <div class="modal-backdrop" id="snack-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="snack-modal-title">Tambah Snack Baru</h3>
+        <button class="modal-close" onclick="closeSnackModal()">&times;</button>
+      </div>
+      <form id="snack-form" onsubmit="submitSnackForm(event)">
+        <input type="hidden" id="snack-id">
+        
+        <div class="form-group">
+          <label class="form-label" for="snack-name">Nama Snack / Makanan:</label>
+          <input type="text" id="snack-name" class="form-control" required placeholder="Contoh: Keripik Singkong Balado">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="snack-price">Harga (Rupiah):</label>
+          <input type="number" id="snack-price" class="form-control" required min="0" step="1" placeholder="15000">
+        </div>
+
+        <!-- Unggah Foto Makanan -->
+        <div class="form-group">
+          <label class="form-label">Foto Makanan:</label>
+          <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+            <img id="snack-img-preview" src="/static/images/default-logo.svg" alt="Preview Foto" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border-beige);">
+            <div style="flex-grow: 1;">
+              <label class="btn btn-outline btn-sm" style="cursor: pointer;">
+                📷 Unggah Foto dari Komputer
+                <input type="file" id="snack-file-input" accept="image/*" style="display: none;" onchange="handleImageUpload(this, 'snack-image-url', 'snack-img-preview')">
+              </label>
+              <span id="snack-upload-status" class="form-hint" style="margin-left: 8px;"></span>
+            </div>
+          </div>
+          <input type="hidden" id="snack-image-url">
+          <button type="button" class="btn btn-outline btn-sm" style="font-size: 0.75rem; padding: 2px 6px;" onclick="toggleSnackUrlInput()">
+            🔗 Atau gunakan link gambar online
+          </button>
+          <div id="snack-url-wrapper" style="display: none; margin-top: 6px;">
+            <input type="text" id="snack-image-url-manual" class="form-control" placeholder="https://contoh.com/foto-snack.jpg" oninput="document.getElementById('snack-image-url').value = this.value; document.getElementById('snack-img-preview').src = this.value || '/static/images/default-logo.svg';">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="snack-desc">Deskripsi Singkat Rasa / Porsi:</label>
+          <textarea id="snack-desc" class="form-control" placeholder="Irisan renyah dengan taburan bumbu cabai asli, tanpa pengawet."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="snack-badge">Label Khusus (Opsional):</label>
+          <input type="text" id="snack-badge" class="form-control" placeholder="Contoh: Favorit, Terlaris, Pedas, Baru">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn btn-outline" onclick="closeSnackModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Snack</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL PAKET ==================== -->
+  <div class="modal-backdrop" id="package-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="package-modal-title">Tambah Paket Baru</h3>
+        <button class="modal-close" onclick="closePackageModal()">&times;</button>
+      </div>
+      <form id="package-form" onsubmit="submitPackageForm(event)">
+        <input type="hidden" id="package-id">
+
+        <div class="form-group">
+          <label class="form-label" for="package-name">Nama Paket Snack:</label>
+          <input type="text" id="package-name" class="form-control" required placeholder="Contoh: Paket Snack Box Arisan">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="package-price">Harga Paket (Rupiah):</label>
+          <input type="number" id="package-price" class="form-control" required min="0" step="1" placeholder="25000">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="package-desc">Keterangan Paket:</label>
+          <input type="text" id="package-desc" class="form-control" placeholder="Cocok untuk konsumsi 1 orang pada acara rapat/arisan.">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="package-items">Daftar Isi Paket (Satu item per baris):</label>
+          <textarea id="package-items" class="form-control" rows="4" placeholder="1x Risoles Ragout Ayam&#10;1x Pastel Renyah Telur&#10;1x Lemper Ayam Bakar&#10;Air Mineral Cup"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="package-badge">Label Khusus (Opsional):</label>
+          <input type="text" id="package-badge" class="form-control" placeholder="Contoh: Paling Laris, Hemat, Eksklusif">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn btn-outline" onclick="closePackageModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Paket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notifikasi Interaktif -->
+  <div class="toast-notice" id="admin-toast">
+    Data berhasil disimpan!
+  </div>
+
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>
+

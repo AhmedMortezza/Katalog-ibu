@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Snack Ibu</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=2">
+  <link rel="icon" type="image/svg+xml" href="/static/images/default-logo.svg">
+</head>
+<body>
+
+  <!-- Header Halaman Awal: Nama Usaha & Logo -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-wrapper">
+        <img id="store-logo" src="/static/images/default-logo.svg" alt="Logo Usaha" class="brand-logo-img">
+        <div class="brand-text">
+          <span id="store-name" class="brand-name">Dapur Snack Ibu</span>
+          <span id="store-tagline" class="brand-tagline">Camilan Renyah & Lezat Buatan Rumah</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a href="/admin" class="btn btn-outline btn-sm" title="Buka Panel Pengaturan Backend">
+          ⚙️ Kelola Toko
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content: Gambar Makanan, Harga & Paket Snack -->
+  <main class="container">
+    
+    <!-- Hero Pengantar Minimalis Sesuai Permintaan -->
+    <section class="hero-welcome">
+      <span class="hero-welcome-badge">Katalog Pilihan</span>
+      <h2 id="welcome-title">Katalog Snack dan Rice Box</h2>
+    </section>
+
+    <!-- Navigasi Tab Kategori -->
+    <div class="section-nav">
+      <button class="nav-pill active" onclick="switchSection('snacks')">🍪 Aneka Camilan</button>
+      <button class="nav-pill" onclick="switchSection('packages')">📦 Paket Snack Hemat</button>
+      <button class="nav-pill" onclick="switchSection('order')">📝 Form Pemesanan WA</button>
+    </div>
+
+    <!-- Bagian 1: Daftar Gambar Makanan & Harga -->
+    <section id="section-snacks" class="catalog-section">
+      <div class="section-title-wrap">
+        <h3 class="section-heading">Daftar Camilan Satuan</h3>
+        <span class="section-subtitle" id="snacks-count">Memuat camilan...</span>
+      </div>
+      <div class="snack-grid" id="snacks-container">
+        <!-- Kartu snack akan di-render secara dinamis oleh JavaScript -->
+      </div>
+    </section>
+
+    <!-- Bagian 2: Paket Snack -->
+    <section id="section-packages" class="catalog-section" style="display: none;">
+      <div class="section-title-wrap">
+        <h3 class="section-heading">Pilihan Paket Snack & Hampers</h3>
+        <span class="section-subtitle" id="packages-count">Memuat paket...</span>
+      </div>
+      <div class="package-grid" id="packages-container">
+        <!-- Kartu paket akan di-render secara dinamis oleh JavaScript -->
+      </div>
+    </section>
+
+    <!-- Bagian 3: Formulir Pemesanan Langsung via WhatsApp -->
+    <section id="section-order" class="order-section" style="display: none;">
+      <div class="order-card">
+        <div class="order-header">
+          <div class="order-icon-badge">📱</div>
+          <div>
+            <h3 class="order-title">Formulir Pemesanan Cepat via WhatsApp</h3>
+            <p class="order-subtitle">Pilih camilan yang diinginkan, lengkapi data singkat, dan kirim pesanan langsung ke WhatsApp Ibu.</p>
+          </div>
+        </div>
+
+        <div class="order-body">
+          <!-- Box Daftar Menu yang Dipesan -->
+          <div class="order-items-box">
+            <div class="order-box-title">
+              <span>🛒 Daftar Camilan yang Dipilih</span>
+              <div style="display: flex; gap: 8px;">
+                <select id="quick-add-select" class="form-control" style="width: auto; padding: 4px 10px; font-size: 0.85rem;" onchange="handleQuickAddSelect(this)">
+                  <option value="">+ Tambah Camilan ke Pesanan</option>
+                </select>
+              </div>
+            </div>
+            
+            <div id="order-selected-items" class="order-selected-list">
+              <!-- Render via JS: Daftar camilan dengan tombol +/- dan hapus -->
+            </div>
+
+            <div class="order-total-bar">
+              <span>Total Estimasi Pesanan:</span>
+              <span id="order-total-price" class="order-total-amount">Rp 0</span>
+            </div>
+          </div>
+
+          <!-- Data Pemesan -->
+          <form id="order-form" onsubmit="sendWhatsAppOrder(event)">
+            <div class="order-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="order-name">Nama Pemesan: *</label>
+                <input type="text" id="order-name" class="form-control" required placeholder="Contoh: Bu Ratna / Mas Dimas">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="order-delivery-type">Metode Pengambilan: *</label>
+                <select id="order-delivery-type" class="form-control" onchange="toggleAddressField(this.value)">
+                  <option value="Antar ke Alamat">🚚 Antar ke Alamat / Pengiriman</option>
+                  <option value="Ambil Sendiri">🏠 Ambil Langsung ke Rumah Ibu</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="address-group">
+              <label class="form-label" for="order-address">Alamat Pengiriman Lengkap: *</label>
+              <textarea id="order-address" class="form-control" rows="2" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, patokan jalan..." required></textarea>
+            </div>
+
+            <div class="order-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="order-date">Tanggal & Waktu Diinginkan: (Opsional)</label>
+                <input type="text" id="order-date" class="form-control" placeholder="Contoh: Besok jam 14.00 / Hari Sabtu pagi">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="order-notes">Catatan Tambahan: (Opsional)</label>
+                <input type="text" id="order-notes" class="form-control" placeholder="Contoh: Pisang karamel jangan terlalu manis, bungkus terpisah">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-wa" style="width: 100%; padding: 14px; font-size: 1.05rem; margin-top: 10px; cursor: pointer;">
+              💬 Kirim Pesanan via WhatsApp Sekarang
+            </button>
+            <p class="form-hint" style="text-align: center; margin-top: 10px;">
+              Setelah ditekan, aplikasi WhatsApp Anda akan langsung terbuka dengan format pesanan yang siap dikirimkan ke Ibu.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Sederhana & Ramah -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p id="footer-store-name"><strong>Dapur Snack Ibu</strong> — Selalu dibuat segar dengan cinta.</p>
+      <div class="footer-links">
+        <a href="#top">Kembali ke Atas ↑</a>
+        <span>•</span>
+        <a href="/admin">Panel Backend / Pengelola</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Cart Bar -->
+  <div id="floating-cart" class="floating-cart-bar" style="display: none;" onclick="switchSection('order'); document.getElementById('section-order').scrollIntoView({behavior: 'smooth'});">
+    <span class="floating-cart-text" id="floating-cart-text">🛒 1 camilan dipilih</span>
+    <span class="floating-cart-btn">Lihat & Pesan ➔</span>
+  </div>
+
+  <script src="/static/js/main.js?v=2"></script>
+</body>
+</html>
+

@@ -1,0 +1,269 @@
+{
+  "store": {
+    "name": "N'Tri Snack & Rice Box",
+    "tagline": "You deserve better",
+    "logo_url": "/uploads/img_1793687655881.png",
+    "whatsapp_number": "089652157064"
+  },
+  "snacks": [
+    {
+      "id": 1,
+      "name": "Sus Vla",
+      "price": 2300,
+      "description": "Sus dengan isian vla yang manis dan gurih",
+      "image_url": "/uploads/img_1793645809177.png",
+      "badge": "Favorit"
+    },
+    {
+      "id": 2,
+      "name": "Pastel Ayam",
+      "price": 3000,
+      "description": "Pastel dengan isian ayam yang gurih",
+      "image_url": "/uploads/img_1793645981916.png",
+      "badge": "Terlaris"
+    },
+    {
+      "id": 3,
+      "name": "Roti Pandan",
+      "price": 3000,
+      "description": "Roti dengan rasa pandan yang legit",
+      "image_url": "/uploads/img_1793646075569.png",
+      "badge": ""
+    },
+    {
+      "id": 4,
+      "name": "Putu Ayu",
+      "price": 2500,
+      "description": "Kue putu ayu dengan topping kelapa parut",
+      "image_url": "/uploads/img_1793679902780.jpg",
+      "badge": ""
+    },
+    {
+      "id": 5,
+      "name": "Dadar Gulung",
+      "price": 3000,
+      "description": "Kue dadar pandan dengan isian parutan kelapa dan gula aren",
+      "image_url": "/uploads/img_1793680069557.png",
+      "badge": ""
+    },
+    {
+      "id": 6,
+      "name": "Kue Lumpur Kentang",
+      "price": 2500,
+      "description": "Kue basah yang manis, gurih, dan bertekstur lembut dengan taburan kismis",
+      "image_url": "/uploads/img_1793680161984.png",
+      "badge": ""
+    },
+    {
+      "id": 7,
+      "name": "Brownies Potong",
+      "price": 3000,
+      "description": "Kue cokelat bertekstur lembut dengan rasa cokelat yang pekat",
+      "image_url": "/uploads/img_1793683069598.png",
+      "badge": "Favorit"
+    },
+    {
+      "id": 8,
+      "name": "Mento",
+      "price": 3500,
+      "description": "Kue gurih kukus dibungkus dengan daun pisang yang berisi daging cincang, kulit dadar, dan santan kental",
+      "image_url": "/uploads/img_1793683839960.png",
+      "badge": ""
+    },
+    {
+      "id": 9,
+      "name": "Lumpia",
+      "price": 2000,
+      "description": "Lumpia goreng berbalut kulit renyah dengan isian tumisan sayur campur dan tahu",
+      "image_url": "/uploads/img_1793683939277.png",
+      "badge": ""
+    },
+    {
+      "id": 10,
+      "name": "Martabak Mie",
+      "price": 2000,
+      "description": "Omelet gurih dan renyah yang terbuat dari campuran mi, telur, dan bumbu pelengkap",
+      "image_url": "/uploads/img_1793684250034.jpg",
+      "badge": ""
+    },
+    {
+      "id": 11,
+      "name": "Mie Sowa Goreng",
+      "price": 2000,
+      "description": "Gorengan gurih berbahan dasar mi misoa dan sayuran yang dipadatkan",
+      "image_url": "/uploads/img_1793684539262.jpg",
+      "badge": ""
+    },
+    {
+      "id": 12,
+      "name": "Lumpia Pisang Coklat",
+      "price": 2000,
+      "description": "lumpia manis renyah dengan isian pisang dan cokelat lumer",
+      "image_url": "/uploads/img_1793684746525.jpg",
+      "badge": ""
+    },
+    {
+      "id": 13,
+      "name": "Roti Panggang Coklat",
+      "price": 3500,
+      "description": "Roti panggang dengan isian selai cokelat manis yang lumer.",
+      "image_url": "/uploads/img_1793685053747.png",
+      "badge": ""
+    },
+    {
+      "id": 14,
+      "name": "Martabak Sayur Ayam",
+      "price": 4000,
+      "description": "Gorengan gurih dan renyah dengan kulit martabak dengan isian tumisan sayur, telur, dan ayam",
+      "image_url": "/uploads/img_1793685160044.png",
+      "badge": ""
+    },
+    {
+      "id": 15,
+      "name": "Risoles Rogut",
+      "price": 2500,
+      "description": "risoles goreng renyah dengan isian krim ragout gurih, ayam cincang, dan sayuran",
+      "image_url": "/uploads/img_1793685854504.png",
+      "badge": ""
+    },
+    {
+      "id": 16,
+      "name": "Risol Mayo",
+      "price": 3000,
+      "description": "risoles dengan isian padat saus mayones, potongan sosis, dan telur",
+      "image_url": "/uploads/img_1793686427651.jpg",
+      "badge": ""
+    },
+    {
+      "id": 17,
+      "name": "Sosis Solo",
+      "price": 2500,
+      "description": "Gulungan dadar telur tipis gurih dengan isian daging ayam cincang",
+      "image_url": "/uploads/img_1793686602918.jpg",
+      "badge": ""
+    },
+    {
+      "id": 18,
+      "name": "Soft Cookies",
+      "price": 5000,
+      "description": "Kue cookies tebal, lembut, dan kenyal dengan isian cokelat",
+      "image_url": "/uploads/img_1793687418885.jpg",
+      "badge": ""
+    },
+    {
+      "id": 19,
+      "name": "Harga Kardus (Isi 2)",
+      "price": 600,
+      "description": "",
+      "image_url": "/static/images/default-logo.svg",
+      "badge": ""
+    },
+    {
+      "id": 20,
+      "name": "Kardus Isi (3 Snack)",
+      "price": 1000,
+      "description": "",
+      "image_url": "/static/images/default-logo.svg",
+      "badge": ""
+    }
+  ],
+  "packages": [
+    {
+      "id": 1,
+      "name": "Nasi Ayam Sayur",
+      "price": 15000,
+      "description": "Pilihan tepat untuk konsumsi acara arisan, rapat kantor, atau hajatan.",
+      "items": [
+        "1x Ayam Goreng/Bakar/Bacem",
+        "1x (Oseng Tempe/Oseng Tempe Buncis/Mie Goreng)",
+        "1x Kerupuk"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=600&auto=format&fit=crop&q=80",
+      "badge": ""
+    },
+    {
+      "id": 2,
+      "name": "Nasi Uduk",
+      "price": 10000,
+      "description": "Kombinasi camilan gurih dan manis untuk dinikmati bersama keluarga di rumah.",
+      "items": [
+        "1x Orek Tempe",
+        "1x Mie goreng",
+        "1x Telur Dadar Iris",
+        "1x Abon",
+        "Tambah Ayam suwir +3000"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=600&auto=format&fit=crop&q=80",
+      "badge": "Hemat"
+    },
+    {
+      "id": 3,
+      "name": "Nasi Kuning",
+      "price": 10000,
+      "description": "Hampers cantik berisikan toples kue kering premium khas Dapur Ibu.",
+      "items": [
+        "1x Orek Tempe",
+        "1x Mie goreng",
+        "1x Telur Dadar Iris",
+        "1x Abon",
+        "Tambah Ayam suwir +3000"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&auto=format&fit=crop&q=80",
+      "badge": "Hemat"
+    },
+    {
+      "id": 4,
+      "name": "Nasi Ayam Goreng",
+      "price": 10000,
+      "description": "",
+      "items": [
+        "1x Ayam Goreng",
+        "1x Nasi",
+        "1x Lalapan",
+        "1x Sambel"
+      ],
+      "image_url": "/static/images/default-logo.svg",
+      "badge": ""
+    },
+    {
+      "id": 5,
+      "name": "Nasi Daun Jeruk Ayam Goreng",
+      "price": 10000,
+      "description": "",
+      "items": [
+        "1x Nasi Daun Jeruk",
+        "Ayam Fillet",
+        "1x Sambel"
+      ],
+      "image_url": "/static/images/default-logo.svg",
+      "badge": ""
+    },
+    {
+      "id": 6,
+      "name": "Nasi Curry Jepang",
+      "price": 18000,
+      "description": "",
+      "items": [
+        "1x Nasi",
+        "1x Curry (Kentang, Wortel, Jamur)",
+        "1x Chicken Katsu"
+      ],
+      "image_url": "/static/images/default-logo.svg",
+      "badge": "Favorit"
+    },
+    {
+      "id": 7,
+      "name": "Ketupat Opor",
+      "price": 11000,
+      "description": "",
+      "items": [
+        "1x Ketupat",
+        "1x Ayam suwir",
+        "1x Sambel Goreng Kentang",
+        "1/2 Telur"
+      ],
+      "image_url": "/static/images/default-logo.svg",
+      "badge": ""
+    }
+  ]
+}
