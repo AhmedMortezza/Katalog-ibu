@@ -43,7 +43,7 @@ def load_db():
         return {
             "store": {
                 "name": "Dapur Snack Ibu",
-                "tagline": "Camilan Renyah & Lezat Buatan Rumah",
+                "tagline": "Snack Renyah & Lezat Buatan Rumah",
                 "logo_url": "/static/images/default-logo.svg",
                 "whatsapp_number": "6281234567890",
                 "admin_password": "admin"

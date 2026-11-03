@@ -1,8 +1,8 @@
 # DESIGN.md - Panduan Desain Katalog Snack Ibu
 
 ## 1. Identitas & Visi Desain
-- **Karakter Usaha**: Katalog kuliner camilan rumahan (home-made snack) yang hangat, bersih, menggugah selera, dan dapat dipercaya.
-- **Tujuan Antarmuka**: Memberikan pengalaman belanja yang nyaman dan to-the-point bagi pelanggan untuk melihat nama toko, logo, menu camilan, paket snack, dan harga dengan jelas, serta memudahkan pemilik untuk memperbarui data lewat panel backend.
+- **Karakter Usaha**: Katalog kuliner snack rumahan (home-made snack) yang hangat, bersih, menggugah selera, dan dapat dipercaya.
+- **Tujuan Antarmuka**: Memberikan pengalaman belanja yang nyaman dan to-the-point bagi pelanggan untuk melihat nama toko, logo, menu snack, paket snack, dan harga dengan jelas, serta memudahkan pemilik untuk memperbarui data lewat panel backend.
 
 ---
 

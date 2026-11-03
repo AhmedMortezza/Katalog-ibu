@@ -16,7 +16,7 @@
         <img id="store-logo" src="/static/images/default-logo.svg" alt="Logo Usaha" class="brand-logo-img">
         <div class="brand-text">
           <span id="store-name" class="brand-name">Dapur Snack Ibu</span>
-          <span id="store-tagline" class="brand-tagline">Camilan Renyah & Lezat Buatan Rumah</span>
+          <span id="store-tagline" class="brand-tagline">Snack Renyah & Lezat Buatan Rumah</span>
         </div>
       </a>
       <!-- Area Header Bersih untuk Pelanggan -->
@@ -34,7 +34,7 @@
 
     <!-- Navigasi Tab Kategori -->
     <div class="section-nav">
-      <button class="nav-pill active" onclick="switchSection('snacks')">🍪 Aneka Camilan</button>
+      <button class="nav-pill active" onclick="switchSection('snacks')">🍪 Aneka Snack</button>
       <button class="nav-pill" onclick="switchSection('packages')">🍱 Pilihan Nasi Box</button>
       <button class="nav-pill" onclick="switchSection('order')">📝 Form Pemesanan WA</button>
     </div>
@@ -42,8 +42,8 @@
     <!-- Bagian 1: Daftar Gambar Makanan & Harga -->
     <section id="section-snacks" class="catalog-section">
       <div class="section-title-wrap">
-        <h3 class="section-heading">Daftar Camilan Satuan</h3>
-        <span class="section-subtitle" id="snacks-count">Memuat camilan...</span>
+        <h3 class="section-heading">Daftar Snack Satuan</h3>
+        <span class="section-subtitle" id="snacks-count">Memuat snack...</span>
       </div>
       <div class="snack-grid" id="snacks-container">
         <!-- Kartu snack akan di-render secara dinamis oleh JavaScript -->
@@ -68,7 +68,7 @@
           <div class="order-icon-badge">📱</div>
           <div>
             <h3 class="order-title">Formulir Pemesanan Cepat via WhatsApp</h3>
-            <p class="order-subtitle">Pilih camilan yang diinginkan, lengkapi data singkat, dan kirim pesanan langsung ke WhatsApp Ibu.</p>
+            <p class="order-subtitle">Pilih snack yang diinginkan, lengkapi data singkat, dan kirim pesanan langsung ke WhatsApp Ibu.</p>
           </div>
         </div>
 
@@ -76,16 +76,16 @@
           <!-- Box Daftar Menu yang Dipesan -->
           <div class="order-items-box">
             <div class="order-box-title">
-              <span>🛒 Daftar Camilan yang Dipilih</span>
+              <span>🛒 Daftar Snack yang Dipilih</span>
               <div style="display: flex; gap: 8px;">
                 <select id="quick-add-select" class="form-control" style="width: auto; padding: 4px 10px; font-size: 0.85rem;" onchange="handleQuickAddSelect(this)">
-                  <option value="">+ Tambah Camilan ke Pesanan</option>
+                  <option value="">+ Tambah Snack ke Pesanan</option>
                 </select>
               </div>
             </div>
             
             <div id="order-selected-items" class="order-selected-list">
-              <!-- Render via JS: Daftar camilan dengan tombol +/- dan hapus -->
+              <!-- Render via JS: Daftar snack dengan tombol +/- dan hapus -->
             </div>
 
             <div class="order-total-bar">
@@ -153,7 +153,7 @@
 
   <!-- Floating Cart Bar -->
   <div id="floating-cart" class="floating-cart-bar" style="display: none;" onclick="switchSection('order'); document.getElementById('section-order').scrollIntoView({behavior: 'smooth'});">
-    <span class="floating-cart-text" id="floating-cart-text">🛒 1 camilan dipilih</span>
+    <span class="floating-cart-text" id="floating-cart-text">🛒 1 snack dipilih</span>
     <span class="floating-cart-btn">Lihat & Pesan ➔</span>
   </div>
 

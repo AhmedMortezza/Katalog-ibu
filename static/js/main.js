@@ -36,7 +36,7 @@ async function loadCatalog() {
 function renderStoreInfo(store) {
   if (!store) return;
   document.getElementById('store-name').textContent = store.name || 'Dapur Snack Ibu';
-  document.getElementById('store-tagline').textContent = store.tagline || 'Camilan Renyah & Lezat Buatan Rumah';
+  document.getElementById('store-tagline').textContent = store.tagline || 'Snack Renyah & Lezat Buatan Rumah';
   document.getElementById('footer-store-name').innerHTML = `<strong>${store.name || 'Dapur Snack Ibu'}</strong>`;
   document.title = `${store.name || 'Dapur Snack Ibu'} - Katalog`;
 
@@ -76,7 +76,7 @@ function renderSnacks(snacks) {
         </div>
         <div class="snack-content">
           <h4 class="snack-title">${snack.name}</h4>
-          <p class="snack-desc">${snack.description || 'Camilan berkualitas buatan rumah.'}</p>
+          <p class="snack-desc">${snack.description || 'Snack berkualitas buatan rumah.'}</p>
           <div class="snack-footer">
             <span class="snack-price">${formatRupiah(snack.price)}</span>
             <button type="button" class="btn btn-wa btn-sm" onclick="handleCardOrder('snack', ${snack.id})">
@@ -228,10 +228,10 @@ function populateQuickAddDropdown() {
   const select = document.getElementById('quick-add-select');
   if (!select) return;
 
-  let optionsHtml = '<option value="">+ Tambah Camilan ke Pesanan</option>';
+  let optionsHtml = '<option value="">+ Tambah Snack ke Pesanan</option>';
 
   if (storeData?.snacks?.length) {
-    optionsHtml += '<optgroup label="── Camilan Satuan ──">';
+    optionsHtml += '<optgroup label="── Snack Satuan ──">';
     storeData.snacks.forEach(s => {
       optionsHtml += `<option value="snack-${s.id}">${s.name} (${formatRupiah(s.price)})</option>`;
     });
@@ -270,8 +270,8 @@ function renderOrderSection() {
   if (orderCart.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 24px 10px; color: var(--text-secondary);">
-        <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Belum ada camilan yang dipilih.</p>
-        <p style="font-size: 0.88rem;">Pilih camilan melalui dropdown di atas, atau klik tombol <strong>"+ Pesan"</strong> pada kartu katalog.</p>
+        <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Belum ada snack yang dipilih.</p>
+        <p style="font-size: 0.88rem;">Pilih snack melalui dropdown di atas, atau klik tombol <strong>"+ Pesan"</strong> pada kartu katalog.</p>
       </div>
     `;
     totalPriceEl.textContent = 'Rp 0';
@@ -347,7 +347,7 @@ function sendWhatsAppOrder(e) {
   e.preventDefault();
 
   if (orderCart.length === 0) {
-    alert('Keranjang pesanan masih kosong. Silakan pilih minimal satu camilan terlebih dahulu!');
+    alert('Keranjang pesanan masih kosong. Silakan pilih minimal satu snack terlebih dahulu!');
     return;
   }
 
@@ -371,7 +371,7 @@ function sendWhatsAppOrder(e) {
   });
 
   // Compose Structured WhatsApp Message
-  let waMessage = `Halo ${storeName}, saya ingin memesan camilan:\n\n`;
+  let waMessage = `Halo ${storeName}, saya ingin memesan snack:\n\n`;
   waMessage += `📋 *RINCIAN PESANAN:*\n${itemsSummary}\n`;
   waMessage += `💰 *Total Estimasi:* ${formatRupiah(grandTotal)}\n\n`;
   waMessage += `👤 *DATA PEMESAN:*\n`;

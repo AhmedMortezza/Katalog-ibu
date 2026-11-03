@@ -1,6 +1,6 @@
 # Web Katalog Snack Ibu
 
-Aplikasi web katalog camilan & paket snack rumahan yang elegan, bersih, dan fleksibel dengan panel backend untuk mengelola nama toko, logo, foto makanan, harga, paket snack, dan pemesanan WhatsApp langsung.
+Aplikasi web katalog snack & paket snack rumahan yang elegan, bersih, dan fleksibel dengan panel backend untuk mengelola nama toko, logo, foto makanan, harga, paket snack, dan pemesanan WhatsApp langsung.
 
 Dibangun dengan mematuhi standar desain **[anti-slop](https://github.com/miqdadbadjuber/anti-slop)** dan panduan [DESIGN.md](DESIGN.md).
 
