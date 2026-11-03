@@ -319,7 +319,7 @@ function renderOrderSection() {
 function toggleAddressField(deliveryType) {
   const addressGroup = document.getElementById('address-group');
   const addressInput = document.getElementById('order-address');
-  if (deliveryType === 'Ambil Sendiri') {
+  if (deliveryType === 'Ambil di Rumah' || deliveryType === 'Ambil Sendiri') {
     addressGroup.style.display = 'none';
     addressInput.removeAttribute('required');
   } else {
